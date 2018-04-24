@@ -1,0 +1,5 @@
+23:04:42 QUANTAXIS>>> declare 'pyecharts_js_extension' plugin manager
+23:04:42 QUANTAXIS>>> scanning for plugins...
+23:04:43 QUANTAXIS>>> register Pypkg
+23:04:43 QUANTAXIS>>> found jupyter_echarts_pypkg
+23:04:43 QUANTAXIS>>> scanning done

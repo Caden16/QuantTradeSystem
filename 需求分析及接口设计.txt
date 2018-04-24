@@ -1,0 +1,105 @@
+1. 选股
+macd, vol, ma
+
+2. 算法交易拆单
+vwap, twap
+
+
+模块设计:
+    数据整理模块:
+        1. 基本数据导入, 更新, 删除
+        2. 指标计算
+        3. 交易日历
+        4. 数据更新记录
+
+    选股模块:
+        1. 选股结果保存
+        2. 选股结果返回
+
+    算法交易模块:
+        1. 买入股票记录
+        2. 算法拆单
+
+数据库表:
+股票日线:
+{
+    stock_code: stock_code;
+    day_data:{
+        date:
+        open:
+        high:
+        low:
+        close:
+        volume:
+        turnover:
+    }
+}
+
+股票1分钟:
+{
+    stock_code: stock_code;
+    min_data:{
+        time:
+        open:
+        high:
+        low:
+        close:
+        volume:
+        turnover:
+    }
+}
+
+指标:
+{
+    stock_code: stock_code;
+    指标:{
+        date:
+        vwap:
+        atr:
+        macd:
+        close_ma5:
+    }
+}
+
+数据更新记录:
+{
+    old_date:
+    new_date:
+    update_code_index:
+    all_stock_code:
+}
+
+指数:
+{
+    code:{
+        date:
+        open:
+        high:
+        low:
+        close:
+        increase:
+    }
+}
+
+选股结果:
+{
+    select_date:
+    select_result:
+    {
+        code:
+        para:{
+            sell_price:
+            sell_date:
+        }
+    }
+}
+
+算法拆单:
+{
+    buy_date:{
+        sell_date:
+        sell_price:
+        sell_time:
+        code: sell_order_percent
+    }
+}
