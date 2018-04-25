@@ -504,7 +504,7 @@ def QA_fetch_get_index_day(code, start_date, end_date, frequence='day', ip=None,
     elif frequence in ['y', 'Y', 'year', 'Year']:
         frequence = 11
 
-    with api.connect(select_best_ip()['stock'], port):
+    with api.connect(ip, port):
 
         start_date = str(start_date)[0:10]
         today_ = datetime.date.today()

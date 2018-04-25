@@ -1,0 +1,146 @@
+21:40:41 QUANTAXIS>>> declare 'pyecharts_js_extension' plugin manager
+21:40:41 QUANTAXIS>>> scanning for plugins...
+21:40:41 QUANTAXIS>>> register Pypkg
+21:40:41 QUANTAXIS>>> found jupyter_echarts_pypkg
+21:40:41 QUANTAXIS>>> scanning done
+21:40:42 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:41:02 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:41:04 QUANTAXIS>>> The 0 of Total 967
+21:41:04 QUANTAXIS>>> DOWNLOAD PROGRESS 0.0 %
+21:41:04 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000001 from 2018-04-24 to 2018-04-25
+21:41:04 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:41:25 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:41:26 QUANTAXIS>>> The 1 of Total 967
+21:41:26 QUANTAXIS>>> DOWNLOAD PROGRESS 0.10 %
+21:41:26 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000002 from 2018-04-24 to 2018-04-25
+21:41:26 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:41:47 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 60.12.136.250 future_ip 61.152.107.141
+21:41:47 QUANTAXIS>>> The 2 of Total 967
+21:41:47 QUANTAXIS>>> DOWNLOAD PROGRESS 0.20 %
+21:41:48 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000003 from 2018-04-24 to 2018-04-25
+21:41:48 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:42:09 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:42:09 QUANTAXIS>>> The 3 of Total 967
+21:42:09 QUANTAXIS>>> DOWNLOAD PROGRESS 0.31 %
+21:42:09 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000004 from 2018-04-24 to 2018-04-25
+21:42:09 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:42:30 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:42:30 QUANTAXIS>>> The 4 of Total 967
+21:42:30 QUANTAXIS>>> DOWNLOAD PROGRESS 0.41 %
+21:42:30 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000005 from 2018-04-24 to 2018-04-25
+21:42:30 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:42:51 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:42:51 QUANTAXIS>>> The 5 of Total 967
+21:42:51 QUANTAXIS>>> DOWNLOAD PROGRESS 0.51 %
+21:42:51 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000006 from 2018-04-24 to 2018-04-25
+21:42:51 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:43:12 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 115.238.90.165 future_ip 61.152.107.141
+21:43:12 QUANTAXIS>>> The 6 of Total 967
+21:43:12 QUANTAXIS>>> DOWNLOAD PROGRESS 0.62 %
+21:43:12 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000007 from 2018-04-24 to 2018-04-25
+21:43:12 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:43:38 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:43:38 QUANTAXIS>>> The 7 of Total 967
+21:43:38 QUANTAXIS>>> DOWNLOAD PROGRESS 0.72 %
+21:43:39 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000008 from 2018-04-24 to 2018-04-25
+21:43:39 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:43:59 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:44:00 QUANTAXIS>>> The 8 of Total 967
+21:44:00 QUANTAXIS>>> DOWNLOAD PROGRESS 0.82 %
+21:44:00 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000009 from 2018-04-24 to 2018-04-25
+21:44:00 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:44:20 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:44:21 QUANTAXIS>>> The 9 of Total 967
+21:44:21 QUANTAXIS>>> DOWNLOAD PROGRESS 0.93 %
+21:44:21 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000010 from 2018-04-24 to 2018-04-25
+21:44:21 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:44:41 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:44:42 QUANTAXIS>>> The 10 of Total 967
+21:44:42 QUANTAXIS>>> DOWNLOAD PROGRESS 1.03 %
+21:44:42 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000011 from 2018-04-24 to 2018-04-25
+21:44:42 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:45:03 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:45:03 QUANTAXIS>>> The 11 of Total 967
+21:45:03 QUANTAXIS>>> DOWNLOAD PROGRESS 1.13 %
+21:45:03 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000012 from 2018-04-24 to 2018-04-25
+21:45:03 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:45:24 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 115.238.90.165 future_ip 61.152.107.141
+21:45:24 QUANTAXIS>>> The 12 of Total 967
+21:45:24 QUANTAXIS>>> DOWNLOAD PROGRESS 1.24 %
+21:45:24 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000013 from 2018-04-24 to 2018-04-25
+21:45:24 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:45:44 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:45:44 QUANTAXIS>>> The 13 of Total 967
+21:45:44 QUANTAXIS>>> DOWNLOAD PROGRESS 1.34 %
+21:45:44 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000015 from 2018-04-24 to 2018-04-25
+21:45:44 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:46:09 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:46:10 QUANTAXIS>>> The 14 of Total 967
+21:46:10 QUANTAXIS>>> DOWNLOAD PROGRESS 1.44 %
+21:46:11 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000016 from 2018-04-24 to 2018-04-25
+21:46:11 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:46:31 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:46:32 QUANTAXIS>>> The 15 of Total 967
+21:46:32 QUANTAXIS>>> DOWNLOAD PROGRESS 1.55 %
+21:46:32 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000017 from 2018-04-24 to 2018-04-25
+21:46:32 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:47:00 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:47:01 QUANTAXIS>>> The 16 of Total 967
+21:47:01 QUANTAXIS>>> DOWNLOAD PROGRESS 1.65 %
+21:47:01 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000018 from 2018-04-24 to 2018-04-25
+21:47:01 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:47:21 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:47:22 QUANTAXIS>>> The 17 of Total 967
+21:47:22 QUANTAXIS>>> DOWNLOAD PROGRESS 1.75 %
+21:47:23 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000019 from 2018-04-24 to 2018-04-25
+21:47:23 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:47:44 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:47:44 QUANTAXIS>>> The 18 of Total 967
+21:47:44 QUANTAXIS>>> DOWNLOAD PROGRESS 1.86 %
+21:47:44 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000020 from 2018-04-24 to 2018-04-25
+21:47:44 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:48:05 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:48:05 QUANTAXIS>>> The 19 of Total 967
+21:48:05 QUANTAXIS>>> DOWNLOAD PROGRESS 1.96 %
+21:48:05 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000021 from 2018-04-24 to 2018-04-25
+21:48:05 QUANTAXIS>>> Selecting the Best Server IP of TDX

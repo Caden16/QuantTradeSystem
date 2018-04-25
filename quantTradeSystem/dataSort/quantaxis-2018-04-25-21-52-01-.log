@@ -1,0 +1,14 @@
+21:52:02 QUANTAXIS>>> declare 'pyecharts_js_extension' plugin manager
+21:52:02 QUANTAXIS>>> scanning for plugins...
+21:52:02 QUANTAXIS>>> register Pypkg
+21:52:02 QUANTAXIS>>> found jupyter_echarts_pypkg
+21:52:02 QUANTAXIS>>> scanning done
+21:52:02 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:52:09 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip hq.cjis.cn future_ip 61.152.107.141
+21:52:11 QUANTAXIS>>> Selecting the Best Server IP of TDX
+21:52:18 QUANTAXIS>>> === The BEST SERVER ===
+ stock_ip 124.160.88.183 future_ip 61.152.107.141
+21:52:18 QUANTAXIS>>> ##JOB04 Now Saving INDEX_DAY==== 
+ Trying updating 000001 from 2018-04-25 to 2018-04-25
+21:52:18 QUANTAXIS>>> SUCCESS

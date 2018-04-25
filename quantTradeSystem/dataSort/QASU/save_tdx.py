@@ -29,7 +29,7 @@ from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import pandas as pd
 import pymongo
 
-from ..QAFetch import QA_fetch_get_stock_block
+from quantTradeSystem.dataSort.QAFetch import QA_fetch_get_stock_block
 from ..QAFetch.QATdx import (QA_fetch_get_index_day,
                                      QA_fetch_get_index_min,
                                      QA_fetch_get_stock_day,
@@ -238,7 +238,7 @@ def QA_SU_save_index_day(client=DATABASE):
                        ('date_stamp', pymongo.ASCENDING)])
     err = []
 
-    def __saving_work(code, coll):
+    def __saving_work(code, coll, ip):
 
         try:
 
@@ -260,15 +260,17 @@ def QA_SU_save_index_day(client=DATABASE):
                                  (code, start_time, end_time))
                 coll.insert_many(
                     QA_util_to_json_from_pandas(
-                        QA_fetch_get_index_day(str(code), start_time, end_time)))
+                        QA_fetch_get_index_day(str(code), start_time, end_time, ip=ip)))
         except:
             err.append(str(code))
-    for i_ in range(len(__index_list)):
-        #__saving_work('000001')
-        QA_util_log_info('The %s of Total %s' % (i_, len(__index_list)))
-        QA_util_log_info('DOWNLOAD PROGRESS %s ' % str(
-            float(i_ / len(__index_list) * 100))[0:4] + '%')
-        __saving_work(__index_list.index[i_][0], coll)
+    ip = select_best_ip()['stock']
+    # for i_ in range(len(__index_list)):
+    #     #__saving_work('000001')
+    #     QA_util_log_info('The %s of Total %s' % (i_, len(__index_list)))
+    #     QA_util_log_info('DOWNLOAD PROGRESS %s ' % str(
+    #         float(i_ / len(__index_list) * 100))[0:4] + '%')
+    #     __saving_work(__index_list.index[i_][0], coll, ip)
+    __saving_work("000001", coll, ip)
     if len(err) < 1:
         QA_util_log_info('SUCCESS')
     else:
