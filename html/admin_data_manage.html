@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuantTradeSystem - 后台管理系统</title>
+    <!-- Bootstrap 主题 CSS 文件 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="../../public/Bootstrap3.3.7/css/bootstrap.css">-->
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <style>
+        .myProgress {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        .myBar {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--navbar navbar-inverse navbar-fixed-top-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid fonth2">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">QuantTradeSystem Admin</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/api/admin/logout">安全退出</a></li>
+                <li><a href="#">&nbsp;</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-3 sidebar">
+            <div class="panel-group table-responsive">
+                <div class="panel panel-default leftMenu" id="myCollapsible">
+                    <div class="panel-heading">
+                        <a class="panel-title" href="/admin/home">终端管理</a>
+                    </div>
+                </div>
+                <!--panel end-->
+
+
+                <div class="panel-group table-responsive">
+                    <div class="panel panel-default leftMenu" id="myCollapsible">
+                        <div class="panel-heading">
+                            <a class="panel-title" href="/admin/data_manage">数据管理</a>
+                        </div>
+                    </div>
+                    <!--panel end-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+    <h2 class="page-header fonth2">股票数据更新</h2>
+    <div class="jumbotron" >
+        <h3>更新进度</h3>
+        <div class="col-sm-12" style="position: relative">
+            <div class="col-sm-1">
+                <p>股票日线</p>
+            </div>
+            <div class="col-sm-11">
+                <div style="padding-right: 5px">
+                    <div id="stockDayProgress" class="myProgress">
+                        <div id="stockDayBar" class="myBar">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="position: relative">
+            <div class="col-sm-1">
+                <p>复权信息</p>
+            </div>
+            <div class="col-sm-11">
+                <div style="padding-right: 5px">
+                    <div id="stockXdxrProgress" class="myProgress">
+                        <div id="stockXdxrBar" class="myBar">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+{#<script src="/static/js/jquery-1.11.1.min.js"></script>#}
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+{#<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>#}
+<!-- 自定 JavaScript 文件 -->
+<script src="/static/js/admin.js"></script>
+<script type="application/javascript">
+    $(document).ready(function () {
+
+    })
+
+    function mac_FormCheck(mac) {
+        var temp = /[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}/;
+        if (!temp.test(mac)) {
+            return false;
+        }
+        return true;
+    }
+
+    setTimeout(move, 1000);
+
+    function move() {
+        var stockDayElem = document.getElementById("stockDayBar");
+        var stockDayWidth = 0;
+        var stockXdxrElem = document.getElementById("stockXdxrBar");
+        var stockXdxrWidth = 0;
+        var stockDayId = setInterval(frame, 1000);
+
+        function frame() {
+            $.ajax({
+                type: "GET",
+                url: "/api/admin/get_update_progress",
+                success: function (data) {
+                    var data = JSON.parse(data)
+                    if (data.result == "success") {
+                        var progressData = data.data;
+                        if (progressData.stock_day_total == 0) {
+                            stockDayElem.style.width = 0 + '%';
+                            stockDayElem.innerHTML = 0 + '%';
+                            stockXdxrElem.style.width = 0 + '%';
+                            stockXdxrElem.innerHTML = 0 + '%';
+                        } else {
+                            if (stockDayWidth >= 100 && stockXdxrWidth >= 100) {
+                                clearInterval(stockDayId);
+                            } else {
+                                stockDayWidth = Math.round((progressData.stock_day_num / progressData.stock_day_total * 100));
+                                stockDayElem.style.width = stockDayWidth + '%';
+                                stockDayElem.innerHTML = stockDayWidth * 1 + '%';
+                                stockXdxrWidth= Math.round((progressData.xdxr_num / progressData.xdxr_total * 100));
+                                stockXdxrElem.style.width = stockXdxrWidth + '%';
+                                stockXdxrElem.innerHTML = stockXdxrWidth * 1 + '%';
+                            }
+                        }
+                    } else {
+                        stockDayElem.style.width = stockDayWidth + '%';
+                        stockDayElem.innerHTML = stockDayWidth * 1 + '%';
+                        stockXdxrElem.style.width = stockXdxrWidth + '%';
+                        stockXdxrElem.innerHTML = stockXdxrWidth * 1 + '%';
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    stockDayElem.style.width = stockDayWidth + '%';
+                    stockDayElem.innerHTML = stockDayWidth * 1 + '%';
+                    stockXdxrElem.style.width = stockXdxrWidth + '%';
+                    stockXdxrElem.innerHTML = stockXdxrWidth * 1 + '%';
+                }
+            })
+
+        }
+    }
+</script>
+
+</body>
+</html>

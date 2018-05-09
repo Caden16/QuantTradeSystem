@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuantTradeSystem - 后台管理系统</title>
+    <!-- Bootstrap 主题 CSS 文件 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="../../public/Bootstrap3.3.7/css/bootstrap.css">-->
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+
+<!--navbar navbar-inverse navbar-fixed-top-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid fonth2">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">QuantTradeSystem Admin</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/api/admin/logout">安全退出</a></li>
+                <li><a href="#">&nbsp;</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-3 sidebar">
+            <div class="panel-group table-responsive">
+                <div class="panel panel-default leftMenu" id="myCollapsible">
+                    <div class="panel-heading">
+                        <a class="panel-title" href="/admin/home">终端管理</a>
+                    </div>
+                </div>
+                <!--panel end-->
+
+
+                <div class="panel-group table-responsive">
+                    <div class="panel panel-default leftMenu" id="myCollapsible">
+                        <div class="panel-heading">
+                            <a class="panel-title" href="/admin/data_manage">数据管理</a>
+                        </div>
+                    </div>
+                    <!--panel end-->
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+    <h2 class="page-header fonth2">允许终端列表</h2>
+    <div class="jumbotron">
+        <table class="table table-striped fonth2">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>终端地址</th>
+                <th>删除</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for index, mac_addr in mac_list %}
+                <tr>
+                    <td>{{ index }}</td>
+                    <td>{{ mac_addr }}</td>
+                    <td>
+                        <button class="btn btn-danger delete-terminal" value={{ mac_addr }}>删除</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div align="center">
+        <input class="input-lg input-mac" type="text" required="True" placeholder="mac地址">
+        <button class="btn btn-default btn-lg add-terminal">添加允许终端</button>
+    </div>
+    <hr>
+</div>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="/static/js/jquery-1.11.1.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!-- 自定 JavaScript 文件 -->
+<script src="/static/js/admin.js"></script>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $(".delete-terminal").on("click", function (e) {
+            var mac_addr = $(this).attr("value")
+            if (mac_FormCheck(mac_addr) == false){
+                alert("非法MAC地址, 删除失败")
+                return
+            }
+            {#var data = JSON.stringify({"mac_terminal": mac_addr})#}
+            $.ajax({
+                type: "POST",
+                data: {"mac_terminal": mac_addr},
+                url: "/api/admin/delete_terminal",
+                success: function (msg) {
+                    var msg = JSON.parse(msg)
+                    if(msg.result == "success"){
+                        window.location.href = "/admin/home"
+                    }else {
+                        alert("删除失败, " + msg.message)
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus)
+                }
+            })
+        })
+
+        $(".add-terminal").on("click", function (e) {
+            var mac_addr = $(".input-mac").val()
+            if (mac_FormCheck(mac_addr) == false){
+                alert("非法MAC地址, 删除失败")
+                return
+            }
+            {#var data = JSON.stringify({"mac_terminal": mac_addr})#}
+            $.ajax({
+                type: "POST",
+                data: {"mac_terminal": mac_addr},
+                url: "/api/admin/add_terminal",
+                success: function (msg) {
+                    var msg = JSON.parse(msg)
+                    if(msg.result == "success"){
+                        window.location.href = "/admin/home"
+                    }else {
+                        alert("删除失败, " + msg.message)
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus)
+                }
+            })
+        })
+    })
+
+    function mac_FormCheck(mac) {
+        var temp = /[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}-[A-Fa-f0-9]{2}/;
+        if (!temp.test(mac)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>
