@@ -1,7 +1,7 @@
 #coding:utf-8
 import datetime
 
-from quantTradeSystem.dataSort.QAUtil import DATABASE
+from dataSort.QAUtil import DATABASE
 
 import pandas as pd
 
@@ -19,19 +19,30 @@ def save_select_result(select_result, code=None):
     else:
         select_result_collection.remove({"date": date}, {"justOne": False})
     if len(select_result) == 0:
+        print("select_result 0")
         return
     if len(select_result) > 1:
         select_result = list(select_result)
         select_result_collection.insert_many(select_result)
+        print("insert many select_result")
     else:
         select_result_collection.insert_one(select_result[0])
+        print("insert one select_result")
 
 def get_select_result(date, code=None):
     select_result_collection = DATABASE.select_stock_result
+    temp_result = None
+    select_result = []
     if code is None:
-        return select_result_collection.find({"date": date})
+        temp_result = select_result_collection.find({"date": date})
     else:
-        return select_result_collection.find({"date": date, "code": code})
+        temp_result = select_result_collection.find({"date": date, "code": code})
+    if temp_result.count() <= 0:
+        return select_result
+    for item in temp_result:
+        del item["_id"]
+        select_result.append(item)
+    return select_result
 
 def merge_select_result(result1, result2, code):
     """
@@ -65,3 +76,11 @@ def get_last_index_date():
         return datetime.datetime.now().strftime('%Y-%m-%d')
     date = index_day_data[index_day_data.count() - 1]["date"]
     return date
+
+def get_last_select_date():
+    select_result_collection = DATABASE.select_stock_result
+    select_result = select_result_collection.find({}).sort("date", -1)
+    if select_result.count() > 0:
+        date = select_result[0]["date"]
+        return date
+    return None

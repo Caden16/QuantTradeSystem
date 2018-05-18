@@ -37,3 +37,10 @@ def get_terminals():
 def delete_terminal(mac_addr):
     terminal_collection = DATABASE.terminals
     terminal_collection.remove({"mac": mac_addr})
+
+def check_terminal(mac_addr):
+    terminal_collection = DATABASE.terminals
+    result = terminal_collection.find({"mac": mac_addr})
+    if result.count() > 0:
+        return True
+    return False

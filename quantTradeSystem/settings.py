@@ -27,7 +27,8 @@ SECRET_KEY = 'n)w^i-aqemo#wk*-i&pgqen^1$(5ouyk@#4q9891=4sy_y)ey0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+]
 
 
 # Application definition
@@ -41,17 +42,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # "mongoengine.django.mongo_auth",
     'rest_framework',
+    'corsheaders',
     'dataSort'
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'quantTradeSystem.login_middleware.SimpleMiddleware'
 ]
 
 ROOT_URLCONF = 'quantTradeSystem.urls'
@@ -59,7 +63,7 @@ ROOT_URLCONF = 'quantTradeSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"html")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,30 +132,39 @@ DEBUG = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# mongodb
-# MONGOADMIN_OVERRIDE_ADMIN = True
-# SESSION_ENGINE = 'mongoengine.django.sessions'  # optional
-# SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
-# AUTHENTICATION_BACKENDS = (
-#     'mongoengine.django.auth.MongoEngineBackend',
-# )
-# MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,"static")
+]
 
-# _MONGODB_USER = 'quant'
-# _MONGODB_PASSWD = 'quant'
-# _MONGODB_HOST = '127.0.0.1'
-# _MONGODB_PORT = 27017
-# _MONGODB_NAME = 'quantTradeSystemDB'
-# _MONGODB_DATABASE_HOST = \
-#     'mongodb://%s:%s@%s/%s' \
-#     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
-#
-# mongoengine.connect(_MONGODB_DATABASE_HOST, host=_MONGODB_HOST, port=_MONGODB_PORT)
-#
-# REST_FRAMEWORK = {
-#     # Use Django's standard `django.contrib.auth` permissions,
-#     # or allow read-only access for unauthenticated users.
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#     ]
-# }
+#跨域增加忽略
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ("localhost:8002",)
+CSRF_TRUSTED_ORIGINS = (
+    'localhost:8002',
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
+

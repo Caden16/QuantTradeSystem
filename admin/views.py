@@ -1,6 +1,6 @@
 #coding:utf-8
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from admin import admin_service
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, render
@@ -10,7 +10,9 @@ def login(request):
     return render_to_response("login.html")
 
 def logout(request):
-    return render_to_response("login.html")
+    response = HttpResponseRedirect('/admin/login/')
+    response.delete_cookie('username')
+    return response
 
 def data_manage(request):
     return render_to_response("admin_data_manage.html")
@@ -43,6 +45,9 @@ def do_login(request):
         return HttpResponse(json.dumps(resp))
     resp = admin_service.check_user(username, password)
     response = HttpResponse(json.dumps(resp))
+    if (resp["result"] == "success"):
+        print("set cookie")
+        response.set_cookie("username",admin_service.get_admin_name())
     return response
 
 def get_admin_name(request):
@@ -105,5 +110,22 @@ def get_update_progress(request):
     :return:
     """
     resp = admin_service.get_update_progress()
+    response = HttpResponse(json.dumps(resp))
+    return response
+
+def start_select_stock(request):
+    resp = admin_service.start_select_stock()
+    response = HttpResponse(json.dumps(resp))
+    return response
+
+def get_latest_select_date(request):
+    resp = admin_service.get_last_select_date()
+    response = HttpResponse(json.dumps(resp))
+    return response
+
+def get_select_result(request):
+    mac_addr = request.COOKIES.get("mac_addr", "")
+    date = request.GET.get("T2Date", "")
+    resp = admin_service.get_select_result(date, mac_addr)
     response = HttpResponse(json.dumps(resp))
     return response

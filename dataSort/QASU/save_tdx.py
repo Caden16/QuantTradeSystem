@@ -107,7 +107,7 @@ def QA_SU_save_stock_day(client=DATABASE, PROGRESS_INFO=None):
 
         __saving_work(stock_list.index[item], coll_stock_day)
         if PROGRESS_INFO:
-            PROGRESS_INFO["stock_day_num"] = item
+            PROGRESS_INFO["stock_day_num"] = item + 1
             PROGRESS_INFO["stock_day_total"] = len(stock_list)
     if len(err) < 1:
         QA_util_log_info('SUCCESS')
@@ -146,7 +146,7 @@ def QA_SU_save_stock_xdxr(client=DATABASE, PROGRESS_INFO=None):
             float(i_ / len(stock_list) * 100))[0:4] + '%')
         __saving_work(stock_list.index[i_], coll)
         if PROGRESS_INFO:
-            PROGRESS_INFO["xdxr_num"] = i_
+            PROGRESS_INFO["xdxr_num"] = i_ + 1
             PROGRESS_INFO["xdxr_total"] = len(stock_list)
     if len(err) < 1:
         QA_util_log_info('SUCCESS')
