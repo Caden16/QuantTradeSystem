@@ -5,7 +5,7 @@ from multiprocessing import Manager
 from multiprocessing import Pool as ThreadPool
 from dataSort.QAUtil import QA_util_log_info
 
-import selectStock.select.SelectResultDao as SelectResultDao
+import selectStock.select.select_result_dao as select_result_dao
 import talib as ta
 
 select_result = []
@@ -19,7 +19,7 @@ def get_stock_data(code):
 
 
 def save_select_result(code, select_result, para):
-    select_date = SelectResultDao.get_last_index_date()
+    select_date = select_result_dao.get_last_index_date()
     contains_code_result = check_result_contains(code, select_result)
     if contains_code_result is None:
         single_result_dict = {"code": code, "date": select_date}
@@ -31,7 +31,7 @@ def save_select_result(code, select_result, para):
 
     # print(single_result_dict)
     QA_util_log_info(select_result)
-    # SelectResultDao.save_select_result(contains_code_result, code)
+    # select_result_dao.save_select_result(contains_code_result, code)
 
 
 def MACD_select(code, select_result):
@@ -65,7 +65,7 @@ def MACD_select(code, select_result):
 
 
 def KDJ_select(code, select_result):
-    select_date = SelectResultDao.get_last_index_date()
+    select_date = select_result_dao.get_last_index_date()
     stock_day_data = get_stock_data(code)
     if len(stock_day_data) < 10:
         return
@@ -105,7 +105,7 @@ def need_to_select_stock_check():
     :return: True： 需要选股   False：不需要选股
     """
     last_index_date = data_sort_service_main.get_last_index_date()
-    last_select_date = SelectResultDao.get_last_select_date()
+    last_select_date = select_result_dao.get_last_select_date()
     if last_index_date and last_select_date and last_index_date == last_select_date:
         return False
     return True
@@ -127,14 +127,14 @@ def start_select_stock():
     threadPool.close()
     threadPool.join()
     if len(select_result) > 0:
-        SelectResultDao.save_select_result(select_result)
+        select_result_dao.save_select_result(select_result)
     print(select_result)
     QA_util_log_info(select_result)
 
 
 def get_last_select_date():
-    return SelectResultDao.get_last_select_date()
+    return select_result_dao.get_last_select_date()
 
 def get_select_result(date, code=None):
-    return SelectResultDao.get_select_result(date, code)
+    return select_result_dao.get_select_result(date, code)
 
