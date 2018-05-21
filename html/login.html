@@ -66,7 +66,7 @@
                                 <input type="password" name="password" placeholder="密码"
                                        class="form-password form-control" id="form-password">
                             </div>
-                            <button type="button" class="btn do-submit-form" >登录</button>
+                            <button type="button" class="btn do-submit-form">登录</button>
                         </form>
                     </div>
                 </div>
@@ -87,12 +87,9 @@
             <script src="/static/js/placeholder.js"></script>
         <![endif]-->
 </body>
+<script src="/static/js/alert.js"></script>
 <script type="application/javascript">
-
     jQuery(document).ready(function () {
-        function testButton() {
-
-        }
         /*
             Fullscreen background
         */
@@ -105,7 +102,7 @@
             $(this).removeClass('input-error');
         });
 
-        $(".do-submit-form").on("click", function (e){
+        $(".do-submit-form").on("click", function (e) {
             var validData = 0;
             $(".login-form").find('input[type="text"], input[type="password"], textarea').each(function () {
                 if ($(this).val() == "") {
@@ -117,7 +114,7 @@
                     $(this).removeClass('input-error');
                 }
             });
-            if (validData <= 1){
+            if (validData <= 1) {
                 return false;
             }
             var data = $(".login-form").serialize();
@@ -127,15 +124,15 @@
                 data: data,
                 success: function (msg) {
                     msg = JSON.parse(msg)
-                    alert(msg)
-                    if (msg.result == "success"){
+                    if (msg.result == "success") {
+                        $.alert("登录成功", "登录结果")
                         window.location.href = "/admin/home"
-                    }else {
-                        $("#note-info").text = "密码错误, " + $("#note-info").text;
+                    } else {
+                        $.alert("密码错误", "登录结果")
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(textStatus)
+                    $.alert(textStatus)
                 }
             })
         });

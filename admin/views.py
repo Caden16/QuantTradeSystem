@@ -6,6 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, render
 # Create your views here.
 
+# 定时数据整理
+from apscheduler.schedulers.background import BackgroundScheduler
+update_data_sch = BackgroundScheduler()
+update_data_sch.add_job(admin_service.update_stock_data, "interval", hours=2)
+update_data_sch.add_job(admin_service.start_select_stock, "interval", hours=4)
+update_data_sch.start()
+
 def login(request):
     return render_to_response("login.html")
 
@@ -27,15 +34,6 @@ def admin_home(request):
 
 @csrf_exempt
 def do_login(request):
-    # resp = {"result": 1}
-    # return HttpResponse(json.dumps(resp))
-    # if request.method == "OPTIONS":
-    #     resp = {"status": 0, "type": "FORM_DATA_ERROR", "message": "表单信息错误"}
-    #     response = HttpResponse()
-    #     response["Content-Type"] = "text/plain"
-    # else:
-    #     resp = {"status": 0, "type": "FORM_DATA_ERROR", "message": "表单信息错误"}
-    #     response = HttpResponse(json.dumps(resp))
     if request.method == "POST":
         # body_json = json.loads(request.body)
         username = request.POST.get("username"," ")

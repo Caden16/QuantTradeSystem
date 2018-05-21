@@ -12,15 +12,16 @@ def save_select_result(select_result, code=None):
     exist_result = []
     for item in exist_result_cursor:
         exist_result.append(item)
-    if exist_result is not None and len(exist_result) >= 1:
-        select_result = merge_select_result(select_result, exist_result, code)
+    # if exist_result is not None and len(exist_result) >= 1:
+    #     select_result = merge_select_result(select_result, exist_result, code)
+    if len(select_result) == 0:
+        print("select_result 0")
+        return
     if code:
         select_result_collection.remove({"date": date, "code": code}, {"justOne": False})
     else:
         select_result_collection.remove({"date": date}, {"justOne": False})
-    if len(select_result) == 0:
-        print("select_result 0")
-        return
+
     if len(select_result) > 1:
         select_result = list(select_result)
         select_result_collection.insert_many(select_result)
@@ -59,11 +60,11 @@ def merge_select_result(result1, result2, code):
         same_df = result2_df[result2_df["code"] == exist_code]
         if len(same_df) >= 1:
             result2_para = same_df["parameter"]
-            para_dict = para_dict + result2_para
+            para_dict = para_dict + result2_para.values[0]
             result_dict["parameter"] = para_dict
             if code:
                 return [result_dict]
-        # merge_result.append(result_dict)
+        merge_result.append(result_dict)
         result2_df = result2_df[result2_df["code"] != exist_code]
     result2_rest = result2_df.to_dict("records")
     merge_result = merge_result + result2_rest

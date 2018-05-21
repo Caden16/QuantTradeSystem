@@ -101,8 +101,10 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <!-- 自定 JavaScript 文件 -->
 <script src="/static/js/admin.js"></script>
+<script src="/static/js/alert.js"></script>
 <script type="application/javascript">
     $(document).ready(function () {
+        window.alert = $.alert
         $(".delete-terminal").on("click", function (e) {
             var mac_addr = $(this).attr("value")
             if (mac_FormCheck(mac_addr) == false){

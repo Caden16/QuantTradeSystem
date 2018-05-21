@@ -1,4 +1,5 @@
 # coding: utf-8
+from dataSort import data_sort_service_main
 from dataSort.QAFetch.QAQuery_Advance import QA_fetch_stock_day_adv, QA_fetch_stock_list_adv
 from multiprocessing import Manager
 from multiprocessing import Pool as ThreadPool
@@ -59,9 +60,7 @@ def MACD_select(code, select_result):
             prevclose = stock_day_data["close"][-1]
             pre_vol_ma5 = stock_day_data["vol_ma5"][-1]
             # contains_code_result = check_result_contains(code, select_result)
-            single_result_para = {"S1": {"stop_price": round(prevclose * 0.95, 2), "profit_price":
-                round(prevclose * 1.15, 2), "buy_price": round(prevclose * 1.02, 2),
-                                         "vol_ma5": pre_vol_ma5 * 100}}
+            single_result_para = {"S1": {"vol_condition": int(pre_vol_ma5 * 200)}}
             save_select_result(code, select_result, single_result_para)
 
 
@@ -83,8 +82,9 @@ def KDJ_select(code, select_result):
     if stock_day_data["slowk"][-1] > stock_day_data["slowd"][-1] and stock_day_data["slowk"][-2] < \
             stock_day_data["slowd"][-2] and stock_day_data["slowk"][-1] <= 15:
         prevclose = stock_day_data["close"][-1]
-        single_result_para = {"S2": {"stop_price": round(prevclose * 0.95, 2), "profit_price":
-            round(prevclose * 1.15, 2), "buy_price": round(prevclose * 1, 2)}}
+        stock_day_data["vol_ma5"] = ta.MA(stock_day_data["volume"], timeperiod=5)
+        pre_vol_ma5 = stock_day_data["vol_ma5"][-1]
+        single_result_para = {"S2": {"vol_condition": int(pre_vol_ma5 * 150)}}
         save_select_result(code, select_result, single_result_para)
 
 
@@ -99,8 +99,21 @@ def check_result_contains(code, select_result):
             return dict_item
     return None
 
+def need_to_select_stock_check():
+    """
+    检查是否需要选股
+    :return: True： 需要选股   False：不需要选股
+    """
+    last_index_date = data_sort_service_main.get_last_index_date()
+    last_select_date = SelectResultDao.get_last_select_date()
+    if last_index_date and last_select_date and last_index_date == last_select_date:
+        return False
+    return True
 
 def start_select_stock():
+    if not need_to_select_stock_check():
+        print("不需要选股")
+        return
     manager = Manager()
     select_result = manager.list()
     code_list = QA_fetch_stock_list_adv()
@@ -124,6 +137,4 @@ def get_last_select_date():
 
 def get_select_result(date, code=None):
     return SelectResultDao.get_select_result(date, code)
-#
-# if __name__ == '__main__':
-#     start_select_stock()
+

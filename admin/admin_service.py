@@ -77,8 +77,9 @@ def update_stock_data():
         resp["message"] += "old Process alive"
         return resp
     else:
-        if os.path.exists(data_sort_service_main.PROGRESS_INFO_FILE):
-            os.remove(data_sort_service_main.PROGRESS_INFO_FILE)
+        if data_sort_service_main.need_to_update_stock_data_check():
+            if os.path.exists(data_sort_service_main.PROGRESS_INFO_FILE):
+                os.remove(data_sort_service_main.PROGRESS_INFO_FILE)
         print("new Process alive")
         run_process = Process(target=data_sort_service_main.start_update_stock_data)
         run_process.start()

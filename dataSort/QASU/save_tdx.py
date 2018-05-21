@@ -37,7 +37,7 @@ from dataSort.QAFetch.QATdx import (QA_fetch_get_index_day,
                                      QA_fetch_get_stock_list,
                                      QA_fetch_get_stock_min,
                                      QA_fetch_get_stock_transaction,
-                                     QA_fetch_get_stock_xdxr, select_best_ip)
+                                     QA_fetch_get_stock_xdxr)
 from dataSort.QAFetch.QATushare import QA_fetch_get_stock_time_to_market
 from dataSort.QAUtil import (DATABASE, QA_util_get_real_date,
                               QA_util_log_info, QA_util_to_json_from_pandas,

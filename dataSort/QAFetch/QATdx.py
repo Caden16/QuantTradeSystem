@@ -79,11 +79,7 @@ def select_best_ip():
         best_stock_ip, best_future_ip))
     return {'stock': best_stock_ip, 'future': best_future_ip}
 
-
 best_ip = select_best_ip()
-
-# return 1 if sh, 0 if sz
-
 
 def QA_fetch_get_security_bars(code, _type, lens, ip=None, port=7709):
     """按bar长度推算数据

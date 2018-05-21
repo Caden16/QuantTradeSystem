@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # "mongoengine.django.mongo_auth",
     'rest_framework',
     'corsheaders',
-    'dataSort'
+    'django_crontab'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -167,4 +167,7 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+# 定时数据整理
+CRONJOBS = [('*/1 * * * *', 'admin.admin_service.update_stock_data'),]
 

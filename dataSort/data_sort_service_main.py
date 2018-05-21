@@ -2,17 +2,44 @@
 import datetime
 import threading
 import json
+from tushare import trade_cal
 from multiprocessing import Pool, Manager
-from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import datetime
 
 import os
 
 from admin import admin_service
 from dataSort.QASU.main import *
-
 PROGRESS_INFO = {}
 PROGRESS_INFO_FILE = os.path.dirname(__file__) + os.sep + "PROGRESS_INFO.json"
+
+def need_to_update_stock_data_check():
+    """
+    检查是否需要更新股票数据
+    :return: True： 需要更新 False：不需要
+    """
+    last_index_date = get_last_index_date()
+    all_trade_cal = trade_cal()
+    all_trade_cal = all_trade_cal[all_trade_cal["isOpen"] == 1]
+    all_trade_cal = all_trade_cal[all_trade_cal["calendarDate"] <=
+                                  (datetime.now()).strftime("%Y-%m-%d")]
+    if len(all_trade_cal) < 2:
+        return True
+    last_trade_date = all_trade_cal["calendarDate"].values[-1]
+    next_to_last_date = all_trade_cal["calendarDate"].values[-2]
+    if last_index_date and last_trade_date and next_to_last_date:
+        if last_index_date == last_trade_date:
+            return False
+        if next_to_last_date == last_index_date and datetime.now().weekday() <= 4:
+            current_time = int(datetime.now().strftime("%H%M"))
+            if current_time < 1500:
+                return False
+    return True
+
 def start_update_stock_data():
+    if not need_to_update_stock_data_check():
+        print("不需要更新数据")
+        return
     if os.path.exists(PROGRESS_INFO_FILE):
         os.remove(PROGRESS_INFO_FILE)
     global PROGRESS_INFO
